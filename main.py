@@ -70,4 +70,10 @@ def residual_norm(A: np.ndarray, x: np.ndarray, b: np.ndarray) -> float | None:
         (float): Wartość normy residuum dla podanych parametrów.
         Jeżeli dane wejściowe są niepoprawne funkcja zwraca `None`.
     """
-    pass
+    if not isinstance(A, np.ndarray) or not isinstance(x, np.ndarray) or not isinstance(b, np.ndarray):
+        return None
+    if A.shape[0] != b.shape[0] or A.shape[1] != x.shape[0]:
+        return None
+
+    r = A @ x - b
+    return np.linalg.norm(r)
